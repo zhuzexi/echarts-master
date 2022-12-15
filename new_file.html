@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	
+	<script type="text/javascript" src="echarts.js"></script>
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="china-main-city-map.js" charset="utf-8"></script>
+	<body>
+		
+		<div id="main" style="width:1350px;height:600px"></div>
+		
+		
+		<script type="text/javascript">
+			
+			var myChart = echarts.init(document.getElementById('main'));
+			var option = {
+            tooltip: {
+            	show: false,
+						trigger: 'item',
+						formatter: '{b}',
+					},
+            legend: {
+						width: 150,
+						height: 85,
+						right: "10%",
+						top: "10%",
+						borderColor: "rgb( 23, 204, 204 )",
+						borderWidth: 1,
+						textStyle: {
+							color: "#000"
+						},
+						data: ["达标", "不达标"]
+					},
+            textStyle: {
+            	normal: {
+            		fontSize: 8,
+            		color: "#fff"
+            	}
+            	
+            },
+            geo: {
+		        map: '楚雄彝族自治州',
+		        hoverable: true,
+		        silent: true,
+		        zoom: 1,
+				itemStyle: {
+					normal: {
+						color: "#254a5c",
+						areaColor: "#254a5c",
+						borderColor: "#2bf0ef"
+					}
+					
+					
+				},
+				label: {
+					normal: {
+                          show: true,
+                          textStyle: {
+								color:"#fff"  
+                          }
+                     },
+				}
+		    },
+            series: [
+	            {
+	            	name: "达标",
+	                type: 'effectScatter',
+	                coordinateSystem: 'geo',
+	               	data: [
+							{name: "楚雄市",value: [101.5522989113,25.0388395189,10]},
+							{name: "双柏县",value: [101.6484540258,24.6951300877,10]},
+							{name: "牟定县",value: [101.5534487657,25.3183734133,10]},
+							{name: "南华县",value: [101.2799463483,25.1985520562,10]},
+							{name: "姚安县",value: [101.2481017180,25.5100902381,10]}
+					],
+	                symbolSize: 15,
+	                showEffectOn: 'render',
+	                rippleEffect: {
+	                    brushType: 'stroke'
+	                },
+	                hoverAnimation: false,
+	                label: {
+	                    normal: {
+	                        formatter: '',
+	                        position: 'right',
+	                        show: true
+	                    }
+	                },
+	                itemStyle: {
+	                    normal: {
+	                    	symbolSize: 1,
+	                        color: '#f4e925',
+	                        shadowBlur: 5,
+	                        shadowColor: '#333'
+	                    }
+	                },
+	                zlevel: 1
+	            
+	            },
+	            {
+	            	name: "不达标",
+	                type: 'effectScatter',
+	                coordinateSystem: 'geo',
+	               	data: [
+							
+							{name: "大姚县",value: [101.3309481453,25.7276105891,10]},
+							{name: "永仁县",value: [101.6763276221,26.0621211229,10]},
+							{name: "元谋县",value: [101.8809209383,25.7106277959,10]},
+							{name: "武定县",value: [102.4109317063,25.5361905567,10]},
+							{name: "禄丰县",value: [102.0855127346,25.1558403736,10]}
+					],
+	                symbolSize: 15,
+	                showEffectOn: 'render',
+	                rippleEffect: {
+	                    brushType: 'stroke'
+	                },
+	                hoverAnimation: false,
+	                label: {
+	                    normal: {
+	                        formatter: '',
+	                        position: 'right',
+	                        show: true
+	                    }
+	                },
+	                itemStyle: {
+	                    normal: {
+	                    	symbolSize: 1,
+	                        color: 'red',
+	                        shadowBlur: 5,
+	                        shadowColor: '#333'
+	                    }
+	                },
+	                zlevel: 1
+	            
+	            }
+            ]
+       };
+			$.get('china-main-city/532300.json', function (chinaJson) {
+		        echarts.registerMap('楚雄彝族自治州', chinaJson);
+		        
+		        
+		        myChart.setOption(
+		            option
+		        );
+		    });
+		</script>
+		
+	</body>
+</html>
